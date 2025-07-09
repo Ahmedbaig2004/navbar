@@ -1,7 +1,7 @@
 import { useState,useRef,useEffect } from 'react'
 
 
-import {Plus} from 'lucide-react'
+import {Plus,MoreVertical} from 'lucide-react'
 
 
 const Navbar =({ pages, setPages, activePage, setActivePage})=>{
@@ -40,7 +40,7 @@ const handleRenamePage = (index) => {
     }
   }
 
-  setContextIndex(null); // close menu
+  setContextIndex(null);
 };
 
  
@@ -67,7 +67,7 @@ const handleRenamePage = (index) => {
     <div
       onClick={() => setActivePage(page)}
       
-      className={`px-4 py-1 rounded-lg cursor-pointer text-sm border transition text-nowrap 
+      className={`px-4 py-1 rounded-lg cursor-pointer text-sm border transition text-nowrap flex items-center
         ${page === activePage
           ? "bg-white border-orange-500 shadow"
           : "bg-gray-200 border-gray-300 hover:bg-gray-200"}`}
@@ -80,9 +80,10 @@ const handleRenamePage = (index) => {
           e.stopPropagation();
           setContextIndex(contextIndex === index ? null : index);
         }}
-        className="text-gray-500 hover:text-black ml-1"
+        className="text-gray-500 hover:text-black ml-1 "
       >
-        ⋯
+          <MoreVertical className="w-4 h-4" />
+
       </button>
       
     )}
@@ -110,17 +111,16 @@ const handleRenamePage = (index) => {
 )}
 
     {index < pages.length - 1 && (
-      <div className="group relative mx-[1px] flex items-center pointer-events-none">
-        {/* Dotted line */}
-        <div className="h-0.5 w-6 border-t border-dotted border-gray-900 group-hover:w-12 transition-all duration-300 ease-in-out"></div>
-
-        <button
-          onClick={() => handleInsertPage(index)}
-          className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 flex items-center justify-center rounded-full border border-gray-400 text-gray-600 text-[10px] leading-none bg-white opacity-0 group-hover:opacity-100 transition-opacity"
-        >
-          <Plus className="w-2.5 h-2.5" />
-        </button>
-      </div>
+      <div className="group relative mx-[1px] flex items-center pointer-events-auto">
+  <div className="h-0.5 w-6 border-t border-dotted border-gray-900 group-hover:w-12 transition-all duration-300 ease-in-out"></div>
+  <div className="absolute -inset-x-4 -inset-y-2"></div>
+  <button
+    onClick={() => handleInsertPage(index)}
+    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 flex items-center justify-center rounded-full border border-gray-400 text-gray-600 text-[10px] leading-none bg-white opacity-0 group-hover:opacity-100 transition-opacity"
+  >
+    <Plus className="w-2.5 h-2.5" />
+  </button>
+</div>
     )}
     
   </div>
